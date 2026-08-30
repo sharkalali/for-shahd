@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>إلى ريم 💖</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #ffe6eb;
+            background-image: radial-gradient(#ffb3c1 1px, transparent 1px);
+            background-size: 20px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
+            overflow: hidden;
+            position: relative;
+        }
+
+        html {
+            height: -webkit-fill-available;
+        }
+
+        /* خلفية قلوب متحركة */
+        .bg-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .heart-bg {
+            position: absolute;
+            color: #ff4d6d;
+            font-size: 20px;
+            animation: float 6s infinite linear;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(105vh) rotate(0deg); opacity: 0.8; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* كارت التصميم الرئيسي */
+        .card {
+            background: #ffffff;
+            padding: 30px 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
+            text-align: center;
+            width: 88%;
+            max-width: 400px;
+            position: relative;
+            z-index: 10;
+            border: 3px solid #ffb3c1;
+        }
+
+        .teddy {
+            font-size: 70px;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite ease-in-out;
+            display: inline-block;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            color: #ff2a55;
+            font-size: 22px;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        p {
+            color: #555;
+            font-size: 15px;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        /* منطقة الأزرار */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            min-height: 60px;
+            position: relative;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            font-size: 17px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            touch-action: manipulation;
+        }
+
+        .btn-yes {
+            background-color: #ff4d6d;
+            color: white;
+            transition: transform 0.2s, background-color 0.2s;
+            z-index: 2;
+        }
+
+        .btn-yes:active {
+            transform: scale(0.95);
+        }
+
+        .btn-no {
+            background-color: #f8f9fa;
+            color: #ff4d6d;
+            border: 2px solid #ff4d6d;
+            z-index: 5;
+            transition: left 0.15s ease, top 0.15s ease;
+        }
+
+        /* حقول اختيار التاريخ والوقت */
+        .date-section {
+            display: none;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .date-section label {
+            color: #ff2a55;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input[type="datetime-local"] {
+            padding: 12px;
+            border: 2px solid #ffb3c1;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+            color: #333;
+            text-align: center;
+            width: 100%;
+            background-color: #fff;
+        }
+
+        input[type="datetime-local"]:focus {
+            border-color: #ff4d6d;
+        }
+
+        /* رسالة التأكيد النهائية */
+        .success-message {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-hearts" id="heartsContainer"></div>
+
+    <div class="card" id="mainCard">
+        <!-- المرحلة الأولى: السؤال -->
+        <div id="step1">
+            <div class="teddy">🧸🌸</div>
+            <h1>تقبلين تطلعين وياي بموعد يا ريومتي؟</h1>
+            <p>راح أكون سعيد إذا وافقتي! ✨</p>
+            
+            <div class="btn-group" id="btnGroup">
+                <button class="btn btn-yes" onclick="goToStep2()">اي، موافقة! 💖</button>
+                <button class="btn btn-no" id="noBtn">لا 😢</button>
+            </div>
+        </div>
+
+        <!-- المرحلة الثانية: اختيار الموعد -->
+        <div id="step2" class="date-section">
+            <div class="teddy">📅💖</div>
+            <h1>اختاري اليوم والوقت اللي يناسبج!</h1>
+            <label for="datePicker">حددي التاريخ والوقت:</label>
+            <input type="datetime-local" id="datePicker">
+            <button class="btn btn-yes" onclick="finishProposal()" style="margin-top: 10px; width: 100%;">تأكيد 🌹</button>
+        </div>
+
+        <!-- المرحلة الثالثة: شاشة الشكر والتأكيد -->
+        <div id="step3" class="success-message">
+            <div class="teddy">🥰🎉</div>
+            <h1>تم حفظ الموعد بنجاح!</h1>
+            <p id="finalDateText" style="color: #ff2a55; font-weight: bold; font-size: 16px;"></p>
+            <p>منتظر هذا اليوم بفارغ الصبر! ✨💖</p>
+        </div>
+    </div>
+
+    <script>
+        // توليد قلوب عائمة بالخلفية
+        const heartsContainer = document.getElementById('heartsContainer');
+        for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-bg');
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.animationDelay = Math.random() * 5 + 's';
+            heartsContainer.appendChild(heart);
+        }
+
+        // تحريك زر لا بمرونة وبدون تداخل
+        const noBtn = document.getElementById('noBtn');
+
+        function moveNoButton(e) {
+            if (e) e.preventDefault();
+            const padding = 20;
+            const btnWidth = noBtn.offsetWidth || 90;
+            const btnHeight = noBtn.offsetHeight || 40;
+
+            const maxX = window.innerWidth - btnWidth - padding;
+            const maxY = window.innerHeight - btnHeight - padding;
+
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+
+        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('touchstart', moveNoButton, { passive: false });
+        noBtn.addEventListener('click', moveNoButton);
+
+        // الانتقال لاختيار التاريخ
+        function goToStep2() {
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'flex';
+            
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.getElementById('datePicker').value = now.toISOString().slice(0, 16);
+        }
+
+        // إكمال الطلب وعرض الموعد بالشاشة مباشرة بدون توجيه
+        function finishProposal() {
+            const dateInput = document.getElementById('datePicker').value;
+            if (!dateInput) {
+                alert("الرجاء اختيار التاريخ والوقت أولاً!");
+                return;
+            }
+
+            const formattedDate = new Date(dateInput).toLocaleString('ar-EG', {
+                dateStyle: 'full',
+                timeStyle: 'short'
+            });
+
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step3').style.display = 'flex';
+            document.getElementById('finalDateText').innerText = formattedDate;
+        }
+    </script>
+</body>
+</html>
