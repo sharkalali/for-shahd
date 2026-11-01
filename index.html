@@ -1,276 +1,464 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>إلى ريم 💖</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Date? - SHAHD</title>
 
-        body {
-            background-color: #ffe6eb;
-            background-image: radial-gradient(#ffb3c1 1px, transparent 1px);
-            background-size: 20px 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            min-height: -webkit-fill-available;
-            overflow: hidden;
-            position: relative;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
-        html {
-            height: -webkit-fill-available;
-        }
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-        /* خلفية قلوب متحركة */
-        .bg-hearts {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 0;
-        }
+body {
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #fff0f3, #ffccd5, #ffb3c1);
+  font-family: 'Playfair Display', -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+  color: #57333e;
+}
 
-        .heart-bg {
-            position: absolute;
-            color: #ff4d6d;
-            font-size: 20px;
-            animation: float 6s infinite linear;
-            opacity: 0.6;
-        }
+.background-glow {
+  position: fixed;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: rgba(255, 105, 135, .22);
+  filter: blur(70px);
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
 
-        @keyframes float {
-            0% { transform: translateY(105vh) rotate(0deg); opacity: 0.8; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
+.card {
+  position: relative;
+  z-index: 2;
+  width: min(90%, 430px);
+  min-height: 520px;
+  padding: 35px 25px;
+  background: rgba(255,255,255,.96);
+  border: 1px solid rgba(255,255,255,.9);
+  border-radius: 28px;
+  box-shadow: 0 18px 60px rgba(180, 80, 100, .18);
+  text-align: center;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: cardIn .7s ease;
+}
 
-        /* كارت التصميم الرئيسي */
-        .card {
-            background: #ffffff;
-            padding: 30px 20px;
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(255, 77, 109, 0.2);
-            text-align: center;
-            width: 88%;
-            max-width: 400px;
-            position: relative;
-            z-index: 10;
-            border: 3px solid #ffb3c1;
-        }
+.card.active {
+  display: flex;
+}
 
-        .teddy {
-            font-size: 70px;
-            margin-bottom: 10px;
-            animation: bounce 2s infinite ease-in-out;
-            display: inline-block;
-        }
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(20px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
+/* LOGO IMAGE BOX - BLENDS WHITE BACKGROUND */
+.logo-box {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(255,101,132,0.15);
+  padding: 8px;
+}
 
-        h1 {
-            color: #ff2a55;
-            font-size: 22px;
-            margin-bottom: 15px;
-            line-height: 1.4;
-        }
+.logo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: logoPulse 2.3s ease-in-out infinite;
+}
 
-        p {
-            color: #555;
-            font-size: 15px;
-            margin-bottom: 25px;
-            line-height: 1.4;
-        }
+@keyframes logoPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
 
-        /* منطقة الأزرار */
-        .btn-group {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            min-height: 60px;
-            position: relative;
-        }
+h1 {
+  font-size: 32px;
+  color: #d8577d;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
 
-        .btn {
-            padding: 12px 28px;
-            font-size: 17px;
-            font-weight: bold;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            touch-action: manipulation;
-        }
+.subtitle {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #b56576;
+  margin-bottom: 18px;
+}
 
-        .btn-yes {
-            background-color: #ff4d6d;
-            color: white;
-            transition: transform 0.2s, background-color 0.2s;
-            z-index: 2;
-        }
+.shahd-name {
+  font-family: 'Dancing Script', cursive;
+  font-size: 44px;
+  font-weight: 700;
+  color: #ff6584;
+  margin: 2px 0 12px;
+  text-shadow: 0 3px 12px rgba(255,101,132,0.25);
+}
 
-        .btn-yes:active {
-            transform: scale(0.95);
-        }
+.name-decoration {
+  color: #ff8fa3;
+  font-size: 17px;
+  vertical-align: middle;
+  margin: 0 7px;
+}
 
-        .btn-no {
-            background-color: #f8f9fa;
-            color: #ff4d6d;
-            border: 2px solid #ff4d6d;
-            z-index: 5;
-            transition: left 0.15s ease, top 0.15s ease;
-        }
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  min-height: 60px;
+  margin-top: 10px;
+  position: relative;
+}
 
-        /* حقول اختيار التاريخ والوقت */
-        .date-section {
-            display: none;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 10px;
-        }
+.btn {
+  border: none;
+  border-radius: 30px;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+  touch-action: manipulation;
+}
 
-        .date-section label {
-            color: #ff2a55;
-            font-weight: bold;
-            font-size: 14px;
-        }
+.btn-yes {
+  background: #ff6584;
+  color: white;
+  box-shadow: 0 7px 18px rgba(255,101,132,0.35);
+  position: relative;
+  z-index: 5;
+}
 
-        input[type="datetime-local"] {
-            padding: 12px;
-            border: 2px solid #ffb3c1;
-            border-radius: 12px;
-            font-size: 16px;
-            outline: none;
-            color: #333;
-            text-align: center;
-            width: 100%;
-            background-color: #fff;
-        }
+.btn-yes:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(255,101,132,0.45);
+}
 
-        input[type="datetime-local"]:focus {
-            border-color: #ff4d6d;
-        }
+.btn-no {
+  background: #ffe5ec;
+  color: #b56576;
+  position: relative;
+  z-index: 6;
+  transition: transform 0.15s ease, left 0.15s ease, top 0.15s ease;
+}
 
-        /* رسالة التأكيد النهائية */
-        .success-message {
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-    </style>
+/* DATE CARD */
+.date-title {
+  font-size: 28px;
+  color: #d8577d;
+  margin-bottom: 10px;
+}
+
+.date-text {
+  color: #b56576;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.field {
+  width: 100%;
+  text-align: left;
+  margin: 8px 0;
+}
+
+.field label {
+  display: block;
+  font-size: 14px;
+  color: #b56576;
+  margin-bottom: 5px;
+}
+
+.field input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ffb3c1;
+  background: #fff0f3;
+  border-radius: 12px;
+  color: #65404c;
+  font-family: inherit;
+  font-size: 15px;
+  outline: none;
+}
+
+.field input:focus {
+  border-color: #ff6584;
+  box-shadow: 0 0 0 3px rgba(255,101,132,.15);
+}
+
+.confirm-btn {
+  margin-top: 15px;
+  width: 100%;
+}
+
+/* FINAL CARD */
+.final-title {
+  font-size: 28px;
+  color: #d8577d;
+  margin: 8px 0;
+}
+
+.final-text {
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #b56576;
+  margin-bottom: 5px;
+}
+
+.signature {
+  font-family: 'Dancing Script', cursive;
+  color: #ff6584;
+  font-size: 26px;
+  margin-top: 6px;
+}
+
+/* SINGLE BOUQUET EMOJI */
+.luxury-bouquet {
+  font-size: 56px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: floatBouquet 2.5s ease-in-out infinite;
+}
+
+@keyframes floatBouquet {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* FALLING HEARTS & NAMES */
+.particle {
+  position: fixed;
+  top: -50px;
+  z-index: 1;
+  pointer-events: none;
+  animation: fall linear forwards;
+  user-select: none;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.heart {
+  color: #ff6584;
+  text-shadow: 0 2px 8px rgba(255,101,132,0.25);
+  background: transparent !important;
+}
+
+.falling-name {
+  font-family: 'Dancing Script', cursive;
+  color: rgba(255,101,132,0.9);
+  font-size: 23px;
+  font-weight: 700;
+  background: transparent !important;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-30px) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: .8; }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+</style>
 </head>
+
 <body>
 
-    <div class="bg-hearts" id="heartsContainer"></div>
+<div class="background-glow"></div>
 
-    <div class="card" id="mainCard">
-        <!-- المرحلة الأولى: السؤال -->
-        <div id="step1">
-            <div class="teddy">🧸🌸</div>
-            <h1>تقبلين تطلعين وياي بموعد يا ريومتي؟</h1>
-            <p>راح أكون سعيد إذا وافقتي! ✨</p>
-            
-            <div class="btn-group" id="btnGroup">
-                <button class="btn btn-yes" onclick="goToStep2()">اي، موافقة! 💖</button>
-                <button class="btn btn-no" id="noBtn">لا 😢</button>
-            </div>
-        </div>
+<!-- INVITATION -->
+<section class="card active" id="card1">
 
-        <!-- المرحلة الثانية: اختيار الموعد -->
-        <div id="step2" class="date-section">
-            <div class="teddy">📅💖</div>
-            <h1>اختاري اليوم والوقت اللي يناسبج!</h1>
-            <label for="datePicker">حددي التاريخ والوقت:</label>
-            <input type="datetime-local" id="datePicker">
-            <button class="btn btn-yes" onclick="finishProposal()" style="margin-top: 10px; width: 100%;">تأكيد 🌹</button>
-        </div>
+  <div class="logo-box">
+    <img src="logo.png" alt="Shahd Monogram">
+  </div>
 
-        <!-- المرحلة الثالثة: شاشة الشكر والتأكيد -->
-        <div id="step3" class="success-message">
-            <div class="teddy">🥰🎉</div>
-            <h1>تم حفظ الموعد بنجاح!</h1>
-            <p id="finalDateText" style="color: #ff2a55; font-weight: bold; font-size: 16px;"></p>
-            <p>منتظر هذا اليوم بفارغ الصبر! ✨💖</p>
-        </div>
-    </div>
+  <div class="name-decoration">✧</div>
+  <div class="shahd-name">𝒮𝒽𝒶𝒽𝒹</div>
 
-    <script>
-        // توليد قلوب عائمة بالخلفية
-        const heartsContainer = document.getElementById('heartsContainer');
-        for (let i = 0; i < 20; i++) {
-            const heart = document.createElement('div');
-            heart.classList.add('heart-bg');
-            heart.innerHTML = '💖';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            heart.style.animationDelay = Math.random() * 5 + 's';
-            heartsContainer.appendChild(heart);
-        }
+  <h1>Be My Date?</h1>
 
-        // تحريك زر لا بمرونة وبدون تداخل
-        const noBtn = document.getElementById('noBtn');
+  <p class="subtitle">
+    Some stories are written in the stars, and ours is my favorite... ✨<br>
+    Try to say no if you can! 🤭 🫣
+  </p>
 
-        function moveNoButton(e) {
-            if (e) e.preventDefault();
-            const padding = 20;
-            const btnWidth = noBtn.offsetWidth || 90;
-            const btnHeight = noBtn.offsetHeight || 40;
+  <div class="buttons">
+    <button class="btn btn-yes" id="yesBtn">Yes, I'd love to! ♡</button>
+    <button class="btn btn-no" id="noBtn">No</button>
+  </div>
 
-            const maxX = window.innerWidth - btnWidth - padding;
-            const maxY = window.innerHeight - btnHeight - padding;
+  <p class="subtitle" style="font-size:12px; margin-top:10px;">
+    A little question, with a lot of feelings. ♡
+  </p>
+</section>
 
-            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
-            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+<!-- DATE PICKER -->
+<section class="card" id="card2">
 
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
-        }
+  <div class="name-decoration">✧</div>
+  <div class="shahd-name">𝒮𝒽𝒶𝒽𝒹</div>
 
-        noBtn.addEventListener('mouseover', moveNoButton);
-        noBtn.addEventListener('touchstart', moveNoButton, { passive: false });
-        noBtn.addEventListener('click', moveNoButton);
+  <h2 class="date-title">It's a date! ♡</h2>
 
-        // الانتقال لاختيار التاريخ
-        function goToStep2() {
-            document.getElementById('step1').style.display = 'none';
-            document.getElementById('step2').style.display = 'flex';
-            
-            const now = new Date();
-            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-            document.getElementById('datePicker').value = now.toISOString().slice(0, 16);
-        }
+  <p class="date-text">
+    Now let's choose a special day.<br>
+    When would you like to meet?
+  </p>
 
-        // إكمال الطلب وعرض الموعد بالشاشة مباشرة بدون توجيه
-        function finishProposal() {
-            const dateInput = document.getElementById('datePicker').value;
-            if (!dateInput) {
-                alert("الرجاء اختيار التاريخ والوقت أولاً!");
-                return;
-            }
+  <div class="field">
+    <label for="dateInput">Choose the date</label>
+    <input type="date" id="dateInput">
+  </div>
 
-            const formattedDate = new Date(dateInput).toLocaleString('ar-EG', {
-                dateStyle: 'full',
-                timeStyle: 'short'
-            });
+  <div class="field">
+    <label for="timeInput">Choose the time</label>
+    <input type="time" id="timeInput">
+  </div>
 
-            document.getElementById('step2').style.display = 'none';
-            document.getElementById('step3').style.display = 'flex';
-            document.getElementById('finalDateText').innerText = formattedDate;
-        }
-    </script>
+  <button class="btn btn-yes confirm-btn" id="confirmBtn">
+    Confirm our date ♡
+  </button>
+</section>
+
+<!-- FINAL -->
+<section class="card" id="card3">
+
+  <div class="name-decoration">✧</div>
+  <div class="shahd-name">𝒮𝒽𝒶𝒽𝒹</div>
+
+  <h2 class="final-title">Written in the Stars ♡</h2>
+
+  <p class="final-text">
+    I hope we always remember these moments together,<br>
+    and one day share them with our children<br>
+    while smiling at our beautiful journey... ✨
+  </p>
+
+  <!-- SINGLE BOUQUET EMOJI -->
+  <div class="luxury-bouquet">
+    💐
+  </div>
+
+  <p class="final-text">
+    This bouquet is for you because you accepted! 💖
+  </p>
+
+  <div class="signature">Ibrahim ♡ Shahd</div>
+</section>
+
+<script>
+const card1 = document.getElementById("card1");
+const card2 = document.getElementById("card2");
+const card3 = document.getElementById("card3");
+
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const confirmBtn = document.getElementById("confirmBtn");
+
+function showCard(card) {
+  document.querySelectorAll(".card").forEach(item => {
+    item.classList.remove("active");
+  });
+  card.classList.add("active");
+}
+
+yesBtn.addEventListener("click", () => {
+  showCard(card2);
+});
+
+confirmBtn.addEventListener("click", () => {
+  const date = document.getElementById("dateInput5") || document.getElementById("dateInput").value;
+  const time = document.getElementById("timeInput").value;
+
+  if (!date || !time) {
+    alert("Choose a date and time first ♡");
+    return;
+  }
+  showCard(card3);
+});
+
+/* NO BUTTON: MOVES FURTHER AWAY SMOOTHLY */
+function moveNoButton() {
+  const randomX = (Math.random() - 0.5) * 240;
+  const randomY = (Math.random() - 0.5) * 160;
+
+  noBtn.style.position = "relative";
+  noBtn.style.left = randomX + "px";
+  noBtn.style.top = randomY + "px";
+}
+
+noBtn.addEventListener("mouseenter", moveNoButton);
+noBtn.addEventListener("touchstart", function(e) {
+  e.preventDefault();
+  moveNoButton();
+}, { passive: false });
+
+noBtn.addEventListener("click", function(e) {
+  e.preventDefault();
+  moveNoButton();
+});
+
+/* FALLING HEARTS AND SHAHD NAMES */
+const symbols = ["♡", "♥", "ღ", "✧", "𝒮𝒽𝒶𝒽𝒹", "Shahd"];
+
+function createParticle() {
+  const particle = document.createElement("div");
+  const isName = Math.random() < 0.25;
+
+  particle.className = "particle " + (isName ? "falling-name" : "heart");
+  particle.textContent = isName
+    ? symbols[4]
+    : symbols[Math.floor(Math.random() * 4)];
+
+  particle.style.left = Math.random() * 100 + "vw";
+  particle.style.fontSize = isName
+    ? (18 + Math.random() * 12) + "px"
+    : (14 + Math.random() * 22) + "px";
+
+  const duration = 5 + Math.random() * 7;
+  particle.style.animationDuration = duration + "s";
+  particle.style.opacity = 0.45 + Math.random() * 0.5;
+
+  document.body.appendChild(particle);
+  setTimeout(() => particle.remove(), duration * 1000);
+}
+
+setInterval(createParticle, 180);
+
+for (let i = 0; i < 35; i++) {
+  setTimeout(createParticle, i * 90);
+}
+</script>
+
 </body>
 </html>
